@@ -1,65 +1,45 @@
 package com.ber.progayim
 
+
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var txtView: TextView
+class MainActivity : AppCompatActivity(), OnButtonClicked {
+    private lateinit var txt: AppCompatTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.e("tag", "Berg: onCreate")
+        initFragment()
 
-        txtView = findViewById(R.id.txtView)
+        txt = findViewById(R.id.txt_1)
+        val edit = findViewById<AppCompatEditText>(R.id.act_edit)
+        val btn = findViewById<AppCompatButton>(R.id.btn)
 
-        button1.setOnClickListener {
-            txtView.text = "Red"
-            constraintLayout.setBackgroundColor("#f54248")
-            Toast.makeText(this, "Click 1", Toast.LENGTH_SHORT).show()
-        }
+//        btn.setOnClickListener {
+//            val fragment1 = supportFragmentManager.findFragmentById(R.id.fragment) as? Fragment1
+//            fragment1?.setText(edit.text.toString())
+//
+//            fragment1 as MainActivity
+//        }
 
-        button2.setOnClickListener {
-            txtView.text = "Yellow"
-            Toast.makeText(this, "Click 2", Toast.LENGTH_LONG).show()
-        }
-
-        button3.setOnClickListener {
-            txtView.text = "Green"
-            Toast.makeText(this, "Click 3", Toast.LENGTH_SHORT).show()
+        btn.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.e("tag", "Berg: onCreate")
+    override fun onButtonClicked(enteredText: String) {
+        txt.text = enteredText
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.e("tag", "Berg: onCreate")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.e("tag", "Berg: onCreate")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e("tag", "Berg: onCreate")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.e("tag", "Berg: onCreate")
+    private fun initFragment() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment, FragmentActivityMain())
+            .commit()
     }
 }
