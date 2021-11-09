@@ -1,65 +1,65 @@
 package com.ber.progayim
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var txtView: TextView
+class MainActivity : AppCompatActivity(), OnClickListener {
+    private lateinit var txt1: AppCompatTextView
+    private lateinit var layout: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.e("tag", "Berg: onCreate")
+        initFragments()
 
-        txtView = findViewById(R.id.txtView)
+        layout = findViewById(R.id.layout)
+        txt1 = findViewById(R.id.txt_1)
 
-        button1.setOnClickListener {
-            txtView.text = "Red"
-            constraintLayout.setBackgroundColor("#f54248")
-            Toast.makeText(this, "Click 1", Toast.LENGTH_SHORT).show()
+        val btn1 = findViewById<AppCompatButton>(R.id.btn1)
+        val btn2 = findViewById<AppCompatButton>(R.id.btn2)
+        val btn3 = findViewById<AppCompatButton>(R.id.btn3)
+
+        btn1.setOnClickListener {
+            val fragment1 = supportFragmentManager.findFragmentByTag("fragment1")
+            val fragment2 = supportFragmentManager.findFragmentByTag("fragment2")
+            supportFragmentManager.beginTransaction()
+                .hide(fragment2!!)
+                .show(fragment1!!)
+                .commit()
         }
 
-        button2.setOnClickListener {
-            txtView.text = "Yellow"
-            Toast.makeText(this, "Click 2", Toast.LENGTH_LONG).show()
+        btn2.setOnClickListener {
+            val fragment1 = supportFragmentManager.findFragmentByTag("fragment1")
+            val fragment2 = supportFragmentManager.findFragmentByTag("fragment2")
+            supportFragmentManager.beginTransaction()
+                .show(fragment2!!)
+                .hide(fragment1!!)
+                .commit()
         }
 
-        button3.setOnClickListener {
-            txtView.text = "Green"
-            Toast.makeText(this, "Click 3", Toast.LENGTH_SHORT).show()
+        btn3.setOnClickListener {
+            startActivity(Intent(this, MainActivity2::class.java))
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.e("tag", "Berg: onCreate")
+    private fun initFragments() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, Fragment1(), "fragment1")
+            .addToBackStack(null)
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, Fragment2(), "fragment2")
+            .addToBackStack(null)
+            .commit()
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.e("tag", "Berg: onCreate")
+    override fun onClicked(text: String) {
+        //---
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.e("tag", "Berg: onCreate")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e("tag", "Berg: onCreate")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.e("tag", "Berg: onCreate")
-    }
 }
