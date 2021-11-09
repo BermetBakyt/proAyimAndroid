@@ -1,22 +1,23 @@
 package com.ber.progayim
 
-import android.content.Intent
-import android.graphics.Color
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtView: TextView
+    private lateinit var layout: ConstraintLayout
     override fun onCreate(savedInstanceState: Bundle?) {
        super.onCreate(savedInstanceState)
       setContentView(R.layout.activity_main)
 
       txtView = findViewById(R.id.txt_1)
+      layout = findViewById(R.id.layout)
       val btn1 = findViewById<AppCompatButton>(R.id.btn1)
       val btn2 = findViewById<AppCompatButton>(R.id.btn2)
       val btn3 = findViewById<AppCompatButton>(R.id.btn3)
@@ -28,15 +29,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
     val msg = when (view?.id) {
-        R.id.btn1 -> "RED"
-        R.id.btn2 -> "GREEN"
-        R.id.btn3 -> "YELLOW"
+        R.id.btn1 -> {
+            txtView.text = "RED"
+            layout.setBackgroundColor(ContextCompat.getColor(this, R.color.customRed))
+        }
+        R.id.btn2 -> {
+            txtView.text = "GREEN"
+            layout.setBackgroundColor(ContextCompat.getColor(this, R.color.customGreen))
+        }
+        R.id.btn3 -> {
+            txtView.text = "YELLOW"
+            layout.setBackgroundColor(ContextCompat.getColor(this, R.color.customYellow))
+        }
         else -> "Unknown"
     }
-    txtView.text = msg
-    }
-
-
+}
 }
 
 
