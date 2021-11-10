@@ -1,25 +1,41 @@
 package com.ber.progayim
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
+import android.view.View
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.constraintlayout.widget.ConstraintLayout
 
-class MainActivity : AppCompatActivity(), OnClickListener {
-    private lateinit var image: ImageView
-    private lateinit var layout: ConstraintLayout
+class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-    }
+        val btn1 = findViewById<AppCompatButton>(R.id.btn1)
+        val btn2 = findViewById<AppCompatButton>(R.id.btn2)
+        val btn3 = findViewById<AppCompatButton>(R.id.btn3)
 
-     fun onClickListener(image: ImageView) {
-        supportFragmentManager.findFragmentById(R.id.container2) as? Fragment2
-         fragment2.setValue(image)
+        btn1.setOnClickListener()
+    }
+    private fun onClick(v: View) {
+        val transaction = supportFragmentManager.beginTransaction()
+        val fragment = when(v.id) {
+            R.id.frg1_btn -> Fragment1()
+
+            R.id.frg1_btn2 -> Fragment2()
+            R.id.frg1_btn3 -> Fragment3()
+            else -> {}
+        }
+        // -------код делает то же самое что и replace
+//        val fragmentFind = supportFragmentManager.findFragmentById(R.id.fragment_container)
+//        if (fragmentFind != null) {
+//            trancsaction.remove(fragmentFind)
+//        }
+//        transaction.add(R.id.fragment_container, fragment)
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
+
