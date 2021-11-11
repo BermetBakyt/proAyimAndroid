@@ -16,6 +16,7 @@ class Fragment2 : Fragment(R.layout.fragment_2) {
         txt.setOnClickListener {
             Toast.makeText(requireContext(), "This is Fragment 2 !!!", Toast.LENGTH_SHORT).show()
         }
+
     }
 }
 
