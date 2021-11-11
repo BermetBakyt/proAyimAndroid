@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 class Fragment1 : Fragment(R.layout.fragment_1) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btn = view.findViewById<AppCompatButton>(R.id.btn1)
+        val btn = view.findViewById<AppCompatButton>(R.id.frg1_btn)
         btn.setOnClickListener{
-            Toast.makeToast(requireContext()), "this is Toast"
+            Toast.makeText(requireContext(), "This is Fragment 1!!!", Toast.LENGTH_LONG)
         }
     }
 }
