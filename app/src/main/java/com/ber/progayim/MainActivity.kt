@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var txt: TextView
+    private lateinit var btn: Button
+    private var count: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,20 +26,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn2.setOnClickListener{
-            when(!txt.equals(0)) {
-
+            if(!txt.equals(0)) {
+                txt.text = 0.toString()
             }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString("key", "value")
         super.onSaveInstanceState(outState)
+        outState.putString("count", count.toString())
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        val value = savedInstanceState.getString("key")
+        val count = savedInstanceState.getString("count")
     }
 
 }
