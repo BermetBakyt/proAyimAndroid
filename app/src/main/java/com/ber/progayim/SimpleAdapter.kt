@@ -3,11 +3,10 @@ package com.ber.progayim
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SimpleAdapter
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class SimpleAdapter(val click: (pos: Int) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SimpleAdapter(val click: (pos: Int) -> Unit): RecyclerView.Adapter<SimpleAdapter.ViewHolder>() {
 
     private var list = listOf<String>()
 
@@ -30,14 +29,15 @@ abstract class SimpleAdapter(val click: (pos: Int) -> Unit): RecyclerView.Adapte
     override fun getItemCount(): Int {
         return list.size
     }
-    class ViewHolder (itemView: View, val click: (pos: Int) -> Unit) :RecyclerView.ViewHolder(itemView){
 
+    class ViewHolder (itemView: View, val click: (pos: Int) -> Unit) : RecyclerView.ViewHolder(itemView){
 
         fun bind (item: String) {
             val txt = itemView.findViewById<AppCompatTextView>(R.id.itemTxt)
             txt.text = item
             itemView.setOnClickListener{
                 click.invoke(adapterPosition)
+
             }
         }
     }

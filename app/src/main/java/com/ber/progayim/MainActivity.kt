@@ -1,5 +1,6 @@
 package com.ber.progayim
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val recycler = findViewById<RecyclerView>(R.id.recycler)
         val layoutManager = LinearLayoutManager(this)
-        val adapter = SimpleAdapter {
+        val adapter = SimpleAdapter() {
             Toast.makeText(this, "ITEM $it", Toast.LENGTH_SHORT).show()
         }
 
