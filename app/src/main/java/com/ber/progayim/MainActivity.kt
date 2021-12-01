@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 
+// так не работает же сохранение значения при перевороте экрана
+
 class MainActivity : AppCompatActivity() {
     private lateinit var txt: TextView
     private lateinit var btn: Button
