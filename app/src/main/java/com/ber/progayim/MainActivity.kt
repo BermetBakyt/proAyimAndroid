@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-    val msg = when (view?.id) {
+    val msg = when (view?.id) { // а зачем здесь -> val msg, причем дальше с этой переменной ничего не происходит
         R.id.btn1 -> {
             txtView.text = "RED"
             layout.setBackgroundColor(ContextCompat.getColor(this, R.color.customRed))
